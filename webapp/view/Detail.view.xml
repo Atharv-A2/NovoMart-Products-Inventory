@@ -1,0 +1,146 @@
+<mvc:View displayBlock="true" controllerName="piomtestportal.controller.Detail" height="100%"
+		xmlns="sap.uxap"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:m="sap.m"
+		xmlns:f="sap.f"
+		xmlns:l="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form">
+
+	<ObjectPageLayout id="ObjectPageLayout"
+					 showTitleInHeaderContent="true"
+					alwaysShowContentHeader="false"
+					preserveHeaderStateOnScroll="false"
+					headerContentPinnable="true"
+					isChildPage="true"
+					upperCaseAnchorBar="false">
+				<headerTitle>
+					<ObjectPageDynamicHeaderTitle>
+						<expandedHeading>
+							<m:Title text="{name}" wrapping="true" class="sapUiSmallMarginEnd"/>
+						</expandedHeading>
+
+						<snappedHeading>
+							<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+								<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+									<m:Avatar src="{imageUrl}" displaySize="S" displayShape="Square"/>
+									<m:Title text="{name}" wrapping="true" class="sapUiTinyMarginEnd"/>
+								</m:FlexBox>
+							</m:FlexBox>
+						</snappedHeading>
+
+						<navigationActions>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press=".handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press=".handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press=".handleClose"  tooltip="Close middle column" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+						</navigationActions>
+
+						<actions>
+							<m:Button
+									id="editButton"
+									text="{i18n>edit}"
+									type="Emphasized"
+									press=".onEdit"/>
+							<m:Button
+									id="reorderButton"
+									text="{i18n>reorder}"
+									type="Transparent"
+									press=".onReorderProduct" />
+							<!-- <m:Button
+									id="deleteButton"
+									text="{i18n>delete}"
+									type="Transparent"/> -->
+							<!-- <m:Button
+									text="Toggle Footer"
+									type="Transparent"/>
+							<m:Button
+									icon="sap-icon://action"
+									type="Transparent"/> -->
+						</actions>
+
+					</ObjectPageDynamicHeaderTitle>
+				</headerTitle>
+
+				<headerContent>
+					<m:FlexBox justifyContent="SpaceBetween" alignContent="Stretch">
+						<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+							<m:Avatar src="{imageUrl}"
+									displaySize="L"
+									displayShape="Square"
+									class="sapUiTinyMarginEnd">
+							</m:Avatar>
+							<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+								<m:Label text="{i18n>category}"/>
+								<m:Text text="{category}"/>
+							</m:VBox>
+							<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+								<m:Label text="{i18n>price}"/>
+								<m:ObjectNumber
+									number="{
+										parts:[{path:'price'},{path:'currency'}],
+										type: 'sap.ui.model.type.Currency',
+										formatter: '.formatter.getCurrency'
+									}" />
+							</m:VBox>
+							<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+								<m:Label text="{i18n>stock} Left"/>
+								<m:ObjectNumber number="{stock}" emphasized="false"/>
+							</m:VBox>
+						</m:FlexBox>
+						<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:ObjectStatus
+									text="{
+										parts: [
+											{path: 'stock'},
+											{path: 'reorderThreshold'}
+										],
+										formatter: '.formatter.getStockStatus'
+									}"
+									class="singleLineStatus"
+									inverted="true"
+									state="{
+										parts: [
+											{path: 'stock'},
+											{path: 'reorderThreshold'}
+										],
+										formatter: '.formatter.getStockState'
+									}"/>
+						</m:VBox>
+					</m:FlexBox>
+
+				</headerContent>
+
+		<sections>
+			<ObjectPageSection title="{i18n>generalInformation}">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<form:SimpleForm
+								maxContainerCols="2"
+								editable="false"
+								layout="ResponsiveGridLayout"
+								labelSpanL="12"
+								labelSpanM="12"
+								emptySpanL="0"
+								emptySpanM="0"
+								columnsL="1"
+								columnsM="1">
+								<form:content>
+									<m:Label text="{i18n>product} ID"/>
+									<m:Text text="{productId}"/>
+									<m:Label text="SKU"/>
+									<m:Text text="{sku}"/>
+									<m:Label text="{i18n>description}"/>
+									<m:Text text="{description}"/>
+									<m:Label text="{i18n>supplier}"/>
+									<m:Text text="{supplier}"/>
+									<m:Label text="{i18n>warehouse}"/>
+									<m:Text text="{warehouse}"/>
+								</form:content>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
+</mvc:View>

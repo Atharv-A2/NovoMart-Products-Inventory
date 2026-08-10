@@ -1,0 +1,16 @@
+<mvc:View controllerName="piomtestportal.controller.App"
+    displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f">
+
+    <App id="app">
+        <pages>
+            <Page>
+                <f:FlexibleColumnLayout
+                    id="fcl"
+                    layout="{/layout}" />
+            </Page>
+        </pages>
+    </App>
+</mvc:View>

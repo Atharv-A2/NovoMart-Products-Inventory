@@ -1,0 +1,128 @@
+{
+  "_version": "1.86.0",
+  "sap.app": {
+    "id": "piomtestportal",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.30.0",
+      "toolsId": "3b2c33fa-56c2-4bdf-b978-aaf9ae8b0b95"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.150.1",
+      "libs": {
+        "sap.m": {},
+        "sap.f": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "": {
+          "type": "sap.ui.model.json.JSONModel",
+          "uri": "model/products.json"
+      },
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "piomtestportal.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.f.routing.Router",
+        "controlAggregation": "beginColumnPages",
+        "controlId": "fcl",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "piomtestportal.view",
+        "async": true,
+        "viewPath": "piomtestportal.view"
+      },
+      "routes": [
+        {
+          "name": "RouteListView",
+          "pattern": ":?query:",
+          "target": [
+            "TargetListView"
+          ]
+        },
+        {
+          "name": "RouteDetailView",
+          "pattern": "detail/{product}/{layout}",
+          "target": [
+            "TargetListView",
+            "TargetDetailView"
+          ]
+        },
+        {
+          "name": "RouteNotFoundView",
+          "pattern": ":all*:",
+          "target": [
+            "TargetNotFoundView"
+          ]
+        }
+        ],
+      "targets": {
+        "TargetListView": {
+          "id": "ListView",
+          "name": "ListView",
+          "controlAggregation": "beginColumnPages"
+        },
+        "TargetDetailView": {
+          "id": "Detail",
+					"name": "Detail",
+					"controlAggregation": "midColumnPages"
+				},
+        "TargetNotFoundView": {
+          "id": "NotFound",
+					"name": "NotFound",
+					"controlAggregation": "beginColumnPages"
+				}
+      }
+    },
+    "rootView": {
+      "viewName": "piomtestportal.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

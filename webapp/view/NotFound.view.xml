@@ -1,0 +1,18 @@
+<mvc:View
+    controllerName="piomtestportal.controller.NotFound"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Page title="Products Inventory">
+
+        <content>
+            <IllustratedMessage
+                title="Item Not Found"
+                description="The requested Item could not be found."
+                illustrationType="sapIllus-NoSearchResults"/>
+        </content>
+
+    </Page>
+
+</mvc:View>

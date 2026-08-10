@@ -1,0 +1,81 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+
+	<ViewSettingsDialog
+		id="viewSettingsDialog"
+		confirm="onViewSettingsConfirm">
+
+		<!-- SORT -->
+
+		<sortItems>
+
+			<ViewSettingsItem
+				text="Name"
+				key="name" />
+
+			<ViewSettingsItem
+				text="Price"
+				key="price" />
+
+			<ViewSettingsItem
+				text="Stock"
+				key="stock" />
+
+		</sortItems>
+
+
+		<!-- FILTER -->
+
+		<filterItems>
+
+			<ViewSettingsFilterItem
+				text="Stock Status"
+				key="stockStatus">
+
+				<items>
+
+					<ViewSettingsItem
+						text="Available"
+						key="stockIn" />
+
+					<ViewSettingsItem
+						text="Low Stock"
+						key="stockLow" />
+
+					<ViewSettingsItem
+						text="Out of Stock"
+						key="stockOut" />
+
+				</items>
+
+			</ViewSettingsFilterItem>
+
+
+			<ViewSettingsFilterItem
+				text="Price Range"
+				key="priceRange">
+
+				<items>
+
+					<ViewSettingsItem
+						text="Under $100"
+						key="price0to100" />
+
+					<ViewSettingsItem
+						text="$100 - $300"
+						key="price100to300" />
+
+					<ViewSettingsItem
+						text="$300 and above"
+						key="price300plus" />
+
+				</items>
+
+			</ViewSettingsFilterItem>
+
+		</filterItems>
+
+	</ViewSettingsDialog>
+
+</core:FragmentDefinition>

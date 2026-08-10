@@ -1,0 +1,43 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Dialog 
+        id="reorderDialog"
+        title="Reorder Stock"
+        contentWidth="300px">
+
+        <content>
+            <VBox class="sapUiSmallMargin">
+
+                <Label text="Product"/>
+                <Text text="{reorder>/name}"/>
+
+                <Label text="Current Stock" class="sapUiSmallMarginTop"/>
+                <Text text="{reorder>/stock}"/>
+
+                <Label text="Quantity to Add" class="sapUiSmallMarginTop"/>
+                <Input
+                    id="reorderInput"
+                    type="Number"
+                    placeholder="Enter quantity"/>
+
+            </VBox>
+        </content>
+
+        <beginButton>
+            <Button 
+                text="Submit"
+                type="Emphasized"
+                press=".onSaveReorder"/>
+        </beginButton>
+
+        <endButton>
+            <Button 
+                text="Cancel"
+                press=".onCancelReorder"/>
+        </endButton>
+
+    </Dialog>
+
+</core:FragmentDefinition>

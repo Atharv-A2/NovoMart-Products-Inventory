@@ -1,0 +1,104 @@
+<mvc:View displayBlock="true" controllerName="piomtestportal.controller.ListView" height="100%"
+	  xmlns="sap.m"
+	  xmlns:f="sap.f"
+	  xmlns:core="sap.ui.core"
+	  xmlns:mvc="sap.ui.core.mvc">
+	<f:DynamicPage id="dynamicPageId"
+				   toggleHeaderOnTitleClick="false">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>productsInventory} ({= ${/products}.length })"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<!-- DynamicPage Content -->
+		<f:content>
+			<Table
+				id="productsTable"
+				mode="SingleSelectMaster"
+				itemPress=".onListItemPress"
+				inset="false"
+				items="{
+					path: '/products',
+					sorter: {
+						path: 'name'
+					}
+				}"
+				class="sapFDynamicPageAlignContent"
+				width="auto">
+				<headerToolbar>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<SearchField search=".onSearch" width="17.5rem"/>
+						<OverflowToolbarButton icon="sap-icon://add" type="Transparent" press=".onAdd"/>
+						<OverflowToolbarButton icon="sap-icon://filter" type="Transparent" press=".onOpenViewSettings"/>
+						<Select
+							width="12rem"
+							change=".onFilter">
+							<items>
+								<core:Item key="All" text="All"/>
+								<core:Item key="Electronics" text="Electronics"/>
+								<core:Item key="Networking" text="Networking"/>
+								<core:Item key="Office Supplies" text="Office Supplies"/>
+								<core:Item key="Hardware" text="Hardware"/>
+								<core:Item key="Accessories" text="Accessories"/>
+							</items>
+						</Select>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="24em">
+						<Text text="{i18n>product}" />
+					</Column>
+					<Column width="12em">
+						<Text text="{i18n>category}" />
+					</Column>
+					<Column	hAlign="Right">
+						<Text text="{i18n>price}" />
+					</Column>
+					<Column	width="10rem" hAlign="End">
+						<Text text="{i18n>stock}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Navigation">
+						<cells>
+							<ObjectIdentifier title="{name}" text="{productId}" />
+
+							<ObjectListItem title="{category}" type="Inactive"></ObjectListItem>
+
+							<ObjectNumber
+									number="{
+										parts:[{path:'price'},{path:'currency'}],
+										type: 'sap.ui.model.type.Currency',
+										formatter: '.formatter.getCurrency'
+									}" />
+
+							<ObjectStatus
+								text="{
+									parts: [
+										{path: 'stock'},
+										{path: 'reorderThreshold'}
+									],
+									formatter: '.formatter.getStockStatus'
+								}"
+								class="singleLineStatus"
+								state="{
+									parts: [
+										{path: 'stock'},
+										{path: 'reorderThreshold'}
+									],
+									formatter: '.formatter.getStockState'
+								}"/>
+							
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</f:content>
+		
+	</f:DynamicPage>
+</mvc:View>

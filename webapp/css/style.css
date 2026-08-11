@@ -6,3 +6,10 @@
     margin-bottom: 1rem;
     font-weight: bold;
 }
+
+.detailPageLineStatus {
+    margin-top: 1rem;
+    margin-bottom: 0.5em;
+    font-size: medium;
+    font-weight: bold;
+}

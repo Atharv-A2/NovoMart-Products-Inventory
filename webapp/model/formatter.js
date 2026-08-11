@@ -36,6 +36,19 @@ sap.ui.define([], function () {
             } else {
                 return sCurrency + " " + iPrice;
             }
+        },
+
+        getLastUpdatedTime: function (sLastUpdatedTime) {
+            const date = new Date(sLastUpdatedTime);
+
+            const months = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            const pad = (num) => String(num).padStart(2, "0");
+
+            return `Last Updated - ${date.getDate()}, ${months[date.getMonth()]} ${date.getFullYear()} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
         }
 
     };

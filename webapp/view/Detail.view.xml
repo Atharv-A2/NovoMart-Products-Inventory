@@ -95,7 +95,7 @@
 										],
 										formatter: '.formatter.getStockStatus'
 									}"
-									class="singleLineStatus"
+									class="detailPageLineStatus"
 									inverted="true"
 									state="{
 										parts: [
@@ -104,6 +104,15 @@
 										],
 										formatter: '.formatter.getStockState'
 									}"/>
+
+							<m:ObjectIdentifier
+								text="{
+										parts: [
+											{path: 'lastUpdated'}
+										],
+										formatter: '.formatter.getLastUpdatedTime'
+									}" />
+
 						</m:VBox>
 					</m:FlexBox>
 

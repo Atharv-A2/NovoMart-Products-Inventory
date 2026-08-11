@@ -297,21 +297,6 @@ sap.ui.define([
 		},
 
 		onAdd: function () {
-			var oNewProductModel = new JSONModel({
-				productId: "",
-				name: "",
-				category: "",
-				sku: "",
-				price: 0,
-				currency: "USD",
-				stock: 0,
-				reorderThreshold: 0,
-				supplier: "",
-				warehouse: "",
-				description: "",
-				imageUrl: "",
-				lastUpdated: ""
-			});
 
 			if (!this._oAddDialog) {
 
@@ -323,16 +308,31 @@ sap.ui.define([
 
                     this.getView().addDependent(oDialog);
 
-                    oDialog.setModel(oNewProductModel,"newProduct");
-
+					
                     return oDialog;
-
+					
                 }.bind(this));
             }
-
+			
             this._oAddDialog.then(function (oDialog) {
+				
+				var oNewProductModel = new JSONModel({
+					productId: "",
+					name: "",
+					category: "",
+					sku: "",
+					price: 0,
+					currency: "USD",
+					stock: 0,
+					reorderThreshold: 0,
+					supplier: "",
+					warehouse: "",
+					description: "",
+					imageUrl: "",
+					lastUpdated: ""
+				});
 
-                oDialog.getModel("newProduct").setData(oNewProductModel);
+				oDialog.setModel(oNewProductModel,"newProduct");
 
                 oDialog.open();
 

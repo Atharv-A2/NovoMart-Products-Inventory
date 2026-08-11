@@ -73,7 +73,6 @@
 							<ObjectNumber
 									number="{
 										parts:[{path:'price'},{path:'currency'}],
-										type: 'sap.ui.model.type.Currency',
 										formatter: '.formatter.getCurrency'
 									}" />
 

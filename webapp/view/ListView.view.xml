@@ -33,10 +33,11 @@
 					<OverflowToolbar>
 						<ToolbarSpacer/>
 						<SearchField search=".onSearch" width="17.5rem"/>
-						<OverflowToolbarButton icon="sap-icon://add" type="Transparent" press=".onAdd"/>
-						<OverflowToolbarButton icon="sap-icon://filter" type="Transparent" press=".onOpenViewSettings"/>
+						<OverflowToolbarButton icon="sap-icon://add" text="Add" type="Transparent" press=".onAdd"/>
+						<OverflowToolbarButton icon="sap-icon://filter" text="Sort, Filter" type="Transparent" press=".onOpenViewSettings"/>
 						<Select
-							width="12rem"
+							width="10rem"
+							forceSelection="true"
 							change=".onFilter">
 							<items>
 								<core:Item key="All" text="All"/>
@@ -50,16 +51,30 @@
 					</OverflowToolbar>
 				</headerToolbar>
 				<columns>
-					<Column width="24em">
+
+					<Column
+						minScreenWidth="Tablet"
+						demandPopin="true">
 						<Text text="{i18n>product}" />
 					</Column>
-					<Column width="12em">
+
+					<Column
+						minScreenWidth="Tablet"
+						demandPopin="true">
 						<Text text="{i18n>category}" />
 					</Column>
-					<Column	hAlign="Right">
+
+					<Column
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="Right">
 						<Text text="{i18n>price}" />
 					</Column>
-					<Column	width="10rem" hAlign="End">
+
+					<Column
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="End">
 						<Text text="{i18n>stock}" />
 					</Column>
 				</columns>
@@ -68,7 +83,7 @@
 						<cells>
 							<ObjectIdentifier title="{name}" text="{productId}" />
 
-							<ObjectListItem title="{category}" type="Inactive"></ObjectListItem>
+							<Text text="{category}"/>
 
 							<ObjectNumber
 									number="{

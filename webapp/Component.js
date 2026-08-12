@@ -16,6 +16,46 @@ sap.ui.define([
 		init: function () {
 			UIComponent.prototype.init.apply(this, arguments);
 
+			var oModel = this.getModel();
+
+			var sSavedProducts = localStorage.getItem("products");
+
+			oModel.attachRequestCompleted(function () {
+
+				if (sSavedProducts) {
+
+					try {
+
+						var aProducts = JSON.parse(sSavedProducts);
+
+						oModel.setProperty("/products", aProducts);
+
+					} catch (error) {
+
+						console.error(
+							"Failed to parse products from localStorage",
+							error
+						);
+					}
+
+				} else {
+
+					oModel.attachRequestCompleted(function () {
+
+						var aProducts = oModel.getProperty("/products");
+
+						if (aProducts) {
+
+							localStorage.setItem(
+								"products",
+								JSON.stringify(aProducts)
+							);
+						}
+
+					});
+				}
+			}, this);
+
 			this.oRouter = this.getRouter();
 			this.oRouter.attachBeforeRouteMatched(this.onBeforeRouteMatched, this);
 			this.oRouter.initialize();
@@ -24,15 +64,6 @@ sap.ui.define([
 		onBeforeRouteMatched: function(oEvent) {
 
 			var oModel = this.getModel();
-
-			var savedProducts = localStorage.getItem("products");
-
-			if (savedProducts) {
-				oModel.setProperty(
-					"/products",
-					JSON.parse(savedProducts)
-				);
-			}
 
 			var sLayout = oEvent.getParameters().arguments.layout;
 

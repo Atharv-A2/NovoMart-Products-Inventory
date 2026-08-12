@@ -3,8 +3,9 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/Fragment",
     "sap/m/MessageToast",
+	"sap/m/MessageBox",
     "../model/formatter"
-], function (JSONModel, Controller, Fragment, MessageToast, formatter) {
+], function (JSONModel, Controller, Fragment, MessageToast, MessageBox, formatter) {
 	"use strict";
 
 	return Controller.extend("piomtestportal.controller.Detail", {
@@ -46,15 +47,37 @@ sap.ui.define([
 		},
 		_onProductMatched: function (oEvent) {
 			var oArgs = oEvent.getParameter("arguments");
-
-			this._product = oArgs.product || this._product || "0";
+			var sProduct = oArgs.product;
 
 			this.getOwnerComponent()
 				.getModel()
 				.setProperty("/layout", oArgs.layout);
+
+			var aProducts = this.oModel.getProperty("/products") || [];
+
+    		var iProductIndex = Number(sProduct);
+
+			// Check whether the requested product index exists
+			if (
+				!Number.isInteger(iProductIndex) ||
+				iProductIndex < 0 ||
+				iProductIndex >= aProducts.length
+			) {
+
+				this.oRouter.navTo(
+					"RouteNotFoundView",
+					{},
+					true
+				);
+
+				return;
+			}
+
+			this._product = sProduct;
+
 				
 			this.getView().bindElement({
-				path: "/products/" + this._product
+				path: "/products/" + iProductIndex
 			});
 		},
 
@@ -220,6 +243,60 @@ sap.ui.define([
 
 			this.byId("reorderDialog").close();
 
+		},
+
+		onDeleteProduct: function () {
+
+			var that = this;
+			
+			MessageBox.confirm(
+				"Are you sure you want to delete this product?",
+				{
+					title: "Delete Product",
+
+					onClose: function (sAction) {
+
+						if (sAction !== MessageBox.Action.OK) {
+							return;
+						}
+
+						var oProduct = that.getView()
+							.getBindingContext()
+							.getObject();
+
+						var allProducts = JSON.parse(
+							localStorage.getItem("products")
+						);
+
+						// Exit if localStorage doesn't contain an array
+						if (!allProducts || !Array.isArray(allProducts)) {
+							MessageToast.show(
+								"Products could not be found."
+							);
+							return;
+						}
+
+						var updatedProducts = allProducts.filter(
+							function (item) {
+								return item.productId !== oProduct.productId;
+							}
+						);
+
+						localStorage.setItem(
+							"products",
+							JSON.stringify(updatedProducts)
+						);
+
+						MessageToast.show(
+							"Product deleted successfully"
+						);
+
+						setTimeout(function () {
+							window.location.reload();
+						}, 500);
+					}
+				}
+			);
 		}
 
 	});

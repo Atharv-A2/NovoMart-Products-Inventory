@@ -114,7 +114,7 @@
         "TargetNotFoundView": {
           "id": "NotFound",
 					"name": "NotFound",
-					"controlAggregation": "beginColumnPages"
+					"controlAggregation": "midColumnPages"
 				}
       }
     },

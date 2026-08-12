@@ -45,10 +45,11 @@
 									text="{i18n>reorder}"
 									type="Transparent"
 									press=".onReorderProduct" />
-							<!-- <m:Button
+							<m:Button
 									id="deleteButton"
 									text="{i18n>delete}"
-									type="Transparent"/> -->
+									type="Transparent"
+									press=".onDeleteProduct" />
 							<!-- <m:Button
 									text="Toggle Footer"
 									type="Transparent"/>

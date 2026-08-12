@@ -18,6 +18,7 @@ NovoMart Distributors requires an internal portal for warehouse and procurement 
 * View product details
 * Add products
 * Edit products
+* Delete products
 * Raise stock reorder requests
 * Receive clear UI feedback
 
@@ -172,10 +173,17 @@ The detail page should obtain the selected product using routing and element/con
 
 A reusable dialog is intended to support both:
 
+
 * Creating products
 * Editing existing products
 
 The form should use two-way binding and provide validation for required fields and non-negative price/stock values.
+
+---
+
+## Delete Product
+
+Users will be able to delete the products from the Detail View with a Confirmation Box.
 
 ---
 
